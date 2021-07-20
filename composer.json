@@ -1,0 +1,18 @@
+{
+  "name": "swag/theme-skeleton",
+  "description": "Theme skeleton plugin",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SdTask2\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "SdTask2\\SdTask2",
+    "label": {
+      "de-DE": "Theme SdTask2 plugin",
+      "en-GB": "Theme SdTask2 plugin"
+    }
+  }
+}

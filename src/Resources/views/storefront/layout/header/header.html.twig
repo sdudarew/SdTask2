@@ -1,0 +1,87 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{# Suche vor den anderen Icons gesetzt #}
+{% block layout_header_search %}
+    <div class="col-12 order-2 col-sm order-sm-1 header-search-col">
+        <div class="row">
+            <div class="col">
+                <div class="header-search" id="customSearchBar">
+                    <form action="{{ path('frontend.search.page') }}"
+                          method="get"
+                          data-search-form="true"
+                          data-url="{{ path('frontend.search.suggest') }}?search="
+                          class="header-search-form">
+                        {% block layout_header_search_input_group %}
+                            <div class="input-group">
+                                {% block layout_header_search_input %}
+                                    <input type="search"
+                                           name="search"
+                                           class="form-control header-search-input"
+                                           autocomplete="off"
+                                           autocapitalize="off"
+                                           placeholder="{{ "header.searchPlaceholder"|trans|striptags }}"
+                                           aria-label="{{ "header.searchPlaceholder"|trans|striptags }}"
+                                           value="{{ page.searchTerm }}"
+                                    >
+                                {% endblock %}
+
+                                {# Search button eingefügt #}
+                                {% block layout_header_search_button %}
+                                    <div class="input-group-append">
+                                        <button type="submit"
+                                                class="btn header-search-btn"
+                                                aria-label="{{ "header.searchButton"|trans|striptags }}">
+                                    <span class="header-search-icon">
+                                        {% sw_icon 'search' %}
+                                    </span>
+                                        </button>
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-auto d-none d-sm-block d-lg-none">
+                {% block layout_header_navigation_toggle_tablet %}
+                    <div class="nav-main-toggle">
+                        {% block layout_header_navigation_toggle_tablet_button %}
+                            <button class="btn nav-main-toggle-btn header-actions-btn"
+                                    type="button"
+                                    data-offcanvas-menu="true"
+                                    aria-label="{{ "general.menuLink"|trans|striptags }}">
+                                {% block layout_header_navigation_toggle_tablet_button_icon %}
+                                    {% sw_icon 'stack' %}
+                                {% endblock %}
+                            </button>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# Collapse Sachen entfernt/ Script hinzugefügt. In der main.js funktioniert das Script nicht. Überschrieben? #}
+{% block layout_header_search_toggle %}
+    <div class="col-auto">
+        <div class="search-toggle">
+            <button class="btn header-actions-btn" id="customSearch" onclick="showSearch()"
+                    type="button"
+                    aria-label="{{ "header.searchButton"|trans|striptags }}">
+                {% sw_icon 'search' %}
+            </button>
+        </div>
+    </div>
+    <script>
+        //ein und ausblenden der searchbar per search icon
+        function showSearch() {
+            var x = document.getElementById("customSearchBar");
+            if (window.getComputedStyle(x).display === "none") {
+                document.getElementById("customSearchBar").style.display = "block";
+            } else if (window.getComputedStyle(x).display === "block") {
+                document.getElementById("customSearchBar").style.display = "none";
+            }
+        }
+    </script>
+{% endblock %}
